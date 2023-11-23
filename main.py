@@ -3,16 +3,18 @@ import random
 from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow
+from ui_file import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
         self.do_paint = False
 
     def initUI(self):
-        uic.loadUi('UI.ui', self)
+        # uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.paint)
 
     def paint(self):
@@ -29,8 +31,8 @@ class Example(QMainWindow):
 
     def draw(self, qp):
         # Задаем кисть
-        qp.setBrush(QColor(255, 255, 0))
         for i in range(100):
+            qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
             x = random.randint(20, 600)
             y = random.randint(20, 600)
             r = random.randint(10, 100)
